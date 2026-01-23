@@ -1,0 +1,185 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body, html {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    padding-top: 70px; /* header yüksekliği kadar boşluk aç */
+}
+
+/* Header */
+.header {
+    background: rgba(56, 189, 248, 0.6); /* transparan */
+    display: flex;
+    backdrop-filter: blur(10px); /* modern blur efekti */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* hafif gölge */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 70px;
+}
+
+/* Logo */
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Menu Container */
+.nav-links {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #111827;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: #FCD34D;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover {
+    color: #FCD34D;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Mobil Menü Butonu */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    margin: 0 5px;
+}
+
+.dropbtn {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+/* Alt menü (dropdown) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(56, 189, 248, 0.6); /* transparan */
+    backdrop-filter: blur(10px); /* modern blur efekti */
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 9999;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dropdown-content li {
+    list-style: none;
+}
+
+.dropdown-content li a {
+    color: #111827;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    transition: background-color 0.2s ease;
+    font-weight: normal;
+}
+
+.dropdown-content li a:hover {
+    color: #FCD34D;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Ana menü linklerinde de benzer padding */
+.nav-links > li > a {
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+/* Mobil için */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: rgba(56, 189, 248, 0.95); /* Header rengi + transparanlık */
+        backdrop-filter: blur(8px); /* Modern bulanıklık efekti */
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .nav-links a {
+        color: white;
+        font-size: 18px;
+        width: 100%;
+    }
+}
+

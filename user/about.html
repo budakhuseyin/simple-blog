@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımızda</title>
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/about.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Hero Image (Üstte Büyük Resim) -->
+        <section class="hero">
+            <img src="/assets/images/ben.jpg" alt="Hakkımızda">
+            <h1>Hakkımızda</h1>
+        </section>
+
+        <!-- Hakkımızda İçeriği -->
+        <section class="about-content">
+            <div class="container">
+                <h2>Biz Kimiz?</h2>
+                <p>
+                    Kişisel Blog, güncel içerikler ve ilham verici yazılar sunan bir platformdur. 
+                    Amacımız, bilgi paylaşımı ile herkesin daha fazla öğrenmesine katkı sağlamaktır.
+                </p>
+
+                <h2>Ne Yapıyoruz?</h2>
+                <p>
+                    Blogumuzda teknoloji, seyahat, sanat, kültür ve daha birçok konuda 
+                    özgün ve ilginç içerikler paylaşıyoruz. 
+                </p>
+
+                <h2>İletişim</h2>
+                <p>
+                    Bizimle iletişime geçmek için <a href="#">buraya</a> tıklayın.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Header ve Footer Dinamik Yükleme -->
+    <script>
+        fetch("/components/header.html")
+            .then(response => response.text())
+            .then(data => { document.getElementById("header-placeholder").innerHTML = data; });
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(data => { document.getElementById("footer-placeholder").innerHTML = data; });
+    </script>
+    
+    <script src="../assets/scripts/header.js"></script>
+
+
+</body>
+</html>

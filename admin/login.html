@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi</title>
+    <link rel="stylesheet" href="/styles/admin.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Paneli</h2>
+        <form id="login-form">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" required>
+            
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" required>
+            
+            <button type="submit">Giriş Yap</button>
+        </form>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <script src="/assets/scripts/admin.js"></script>
+</body>
+</html>

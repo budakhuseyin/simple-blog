@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Yorum Yönetimi</title>
+  <link rel="stylesheet" href="../styles/comments.css">
+</head>
+<body class="comments-page">
+  <aside class="sidebar">
+    <h2>Admin Paneli</h2>
+    <ul>
+      <li><a href="dashboard.html">🏠 Ana Sayfa</a></li>
+      <li><a href="manage-posts.html">📝 Blogları Yönet</a></li>
+      <li><a href="new-post.html">➕ Yeni Blog Ekle</a></li>
+      <li><a href="categories.html">📁 Kategoriler</a></li>
+      <li><a href="manage-comments.html" class="active">💬 Yorumlar</a></li>
+      <li><a href="#" id="logout">🚪 Çıkış Yap</a></li>
+    </ul>
+  </aside>
+
+  <div class="comments-container">
+    <h1 class="comments-title">💬 Yorum Yönetimi</h1>
+
+    <table id="commentsTable" class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Blog ID</th>
+          <th>İsim</th>
+          <th>Yorum</th>
+          <th>Tarih</th>
+          <th>İşlemler</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JS ile yüklenecek -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="../assets/scripts/admin-comments.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yeni Blog Ekle</title>
+  <link rel="stylesheet" href="../styles/admin.css" />
+  <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <h2>Admin Paneli</h2>
+      <ul>
+        <li><a href="dashboard.html">🏠 Ana Sayfa</a></li>
+        <li><a href="manage-posts.html">📝 Blogları Yönet</a></li>
+        <li><a href="new-post.html">➕ Yeni Blog Ekle</a></li>
+        <li><a href="categories.html">📂 Kategoriler</a></li>
+        <li><a href="manage-comments.html">💬 Yorumlar</a></li>
+        <li><a href="#" id="logout">🚪 Çıkış Yap</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h1>Yeni Blog Ekle</h1>
+      <form id="new-post-form" enctype="multipart/form-data">
+        <label for="title">Başlık:</label>
+        <input type="text" id="title" name="title" required />
+      
+        <label for="content">İçerik:</label>
+        <textarea id="content" name="content" rows="6" required></textarea>
+      
+        <label for="image">Resim Seç:</label>
+        <input type="file" id="image" name="image" accept="image/*" />
+      
+        <label for="category">Kategori:</label>
+        <select id="category" name="category_id" required></select>
+      
+        <button type="submit">Blogu Yayınla</button>
+      </form>
+
+      <p id="success-message" class="success"></p>
+    </main>
+  </div>
+
+  <script src="../assets/scripts/new-post.js"></script>
+  <script>
+    CKEDITOR.replace('content');
+  </script>
+</body>
+</html>

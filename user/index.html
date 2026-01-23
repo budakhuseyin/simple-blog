@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Ana Sayfa</title>
+    <!-- CSS Dosyalarını Dahil Et -->
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Slider (Hero) -->
+    <div class="slider">
+        <div class="slides">
+            <!-- Slide 1 -->
+            <div class="slide slide-1">
+                <div class="slide-content">
+                    <h1>Hoş Geldin!</h1>
+                    <p>Kişisel bloguma göz at, yeni fikirler keşfet.</p>
+                    <a href="#posts-container" class="btn-hero">Keşfet</a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide slide-2">
+                <div class="slide-content">
+                    <h1>Farklı Yazılar</h1>
+                    <p>Fotoğraflar, hikayeler ve çok daha fazlası.</p>
+                    <a href="#posts-container" class="btn-hero">Okumaya Başla</a>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide slide-3">
+                <div class="slide-content">
+                    <h1>Keyifli Vakit Geçir!</h1>
+                    <p>Tek tıkla yeni dünyalar keşfet.</p>
+                    <a href="#posts-container" class="btn-hero">Hemen Göz At</a>
+                </div>
+            </div>
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <main>
+        <h2 class="blog-header">SON YAZILANLAR</h2>
+        <div id="posts-container">
+            <!-- Blog yazıları buraya eklenecek -->
+        </div>
+
+        <!-- Tüm Blog Yazılarını Gör Butonu -->
+        <div class="see-more-container">
+            <a href="/user/blog.html" class="see-more-btn">Tüm Blog Yazılarını Gör</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Header ve Footer Dinamik Yükleme -->
+    <script>
+        fetch("/components/header.html")
+            .then(response => response.text())
+            .then(data => { document.getElementById("header-placeholder").innerHTML = data; });
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(data => { document.getElementById("footer-placeholder").innerHTML = data; });
+    </script>
+
+    <!-- Script Dosyaları -->
+    <script src="/assets/scripts/header.js"></script>
+    <script src="/assets/scripts/main.js"></script>
+
+</body>
+</html>

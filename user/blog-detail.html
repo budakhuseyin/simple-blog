@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Detay</title>
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/blog-detail.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <div id="blog-detail-container">
+            <h1 id="blog-title"></h1>
+            <img id="blog-image" src="" alt="Blog Resmi">
+            <p id="blog-content"></p>
+            <small id="blog-meta"></small>
+        </div>
+
+        <section id="comments-section">
+            <h2>Yorumlar</h2>
+            <div id="comments-list"></div>
+            <h3>Yorum Yap</h3>
+            <form id="commentForm">
+                <input type="text" id="commenterName" placeholder="Adınız" required />
+                <textarea id="commentText" placeholder="Yorumunuz" required></textarea>
+                <button type="submit">Gönder</button>
+            </form>
+            <div id="comment-message" style="margin-top: 10px;"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Header ve Footer Dinamik Yükleme -->
+    <script>
+        fetch("/components/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+            });
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer-placeholder").innerHTML = data;
+            });
+    </script>
+
+    <!-- JS Dosyaları -->
+    <script src="/assets/scripts/blog-detail.js"></script>
+    <script src="/assets/scripts/header.js"></script>
+    <script src="/assets/scripts/comments.js"></script>
+</body>
+</html>

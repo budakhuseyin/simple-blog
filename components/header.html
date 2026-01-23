@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link rel="stylesheet" href="/styles/header.css">
+    <script src="../assets/scripts/header.js" defer ></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+
+</head>
+<body>
+    <!-- components/header.html -->
+<header class="header">
+    <a href="/user/index.html" class="logo">KİŞİSEL BLOG</a>
+    <nav>
+        <div class="menu-toggle">&#9776;</div> <!-- Mobil Menü Butonu -->
+        <!-- Menü toggle'ın yanına -->
+    
+        <ul class="nav-links">
+            <li><a href="/user/index.html">Home</a></li>
+            <li><a href="/user/about.html">About</a></li>
+            
+            <!-- Blog menüsü -->
+            <li class="dropdown">
+                <a class="dropbtn">Blog ▼</a>
+                <ul class="dropdown-content" id="blogCategories">
+                    <!-- Buraya JS ile kategoriler eklenecek -->
+                </ul>
+            </li>
+
+
+            <li><a href="/user/contact.html" class="contact-btn">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <form id="searchForm" class="search-bar" action="/user/blog.html" method="GET" style="display: flex; align-items: center; gap: 0.5rem;">
+        <input type="text" name="search" placeholder="Bloglarda ara..." style="padding: 6px; border-radius: 4px; border: 1px solid #ccc;" />
+        <button type="submit" style="padding: 6px 10px;">🔍</button>
+    </form>
+    
+    
+
+
+</header>
+</body>
+</html>

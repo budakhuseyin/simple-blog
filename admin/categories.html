@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kategori Yönetimi</title>
+  <!-- Ortak admin stilleri -->
+  <link rel="stylesheet" href="../styles/admin.css">
+  <!-- İsterseniz kategoriye özel ek stiller -->
+  <link rel="stylesheet" href="../styles/categories.css">
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <h2>Admin Paneli</h2>
+      <ul>
+        <li><a href="dashboard.html">🏠 Ana Sayfa</a></li>
+        <li><a href="manage-posts.html">📝 Blogları Yönet</a></li>
+        <li><a href="new-post.html">➕ Yeni Blog Ekle</a></li>
+        <li><a href="categories.html" class="active">🗂 Kategoriler</a></li>
+        <li><a href="manage-comments.html">💬 Yorumlar</a></li>
+        <li><a href="#" id="logout">🚪 Çıkış Yap</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h1>Kategori Yönetimi</h1>
+
+      <!-- Kategori Ekleme Formu -->
+      <section id="category-form-section">
+        <form id="add-category-form">
+          <input type="text" id="category-name" placeholder="Kategori adı" required />
+          <button type="submit">Kategori Ekle</button>
+        </form>
+      </section>
+
+      <!-- Kategori Listesi -->
+      <section id="categories-list-section">
+        <h2>Mevcut Kategoriler</h2>
+        <ul id="categories-list">
+          <!-- Kategoriler burada dinamik olarak listelenecek -->
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/scripts/categories-client.js"></script>
+</body>
+</html>

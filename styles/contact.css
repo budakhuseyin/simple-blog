@@ -1,0 +1,116 @@
+/* Genel Sayfa Stili */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header ve Footer Yükleme Alanları */
+#header-placeholder,
+#footer-placeholder {
+    width: 100%;
+}
+
+/* Contact Form Genel Stili */
+main {
+    width: 60%;
+    margin: 50px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Form Grubu */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #38bdf8;
+    outline: none;
+}
+
+/* Textarea Özelleştirmesi */
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Buton Stili */
+button {
+    background-color: #38bdf8;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #007acc;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #005fa3;
+}
+
+/* Mobil Uyumlu Düzen */
+@media (max-width: 768px) {
+    main {
+        width: 90%;
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+
+    input,
+    textarea {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+}

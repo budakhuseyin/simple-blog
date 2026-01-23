@@ -1,0 +1,194 @@
+/* 📌 Blog Detay Sayfası Stilleri */
+#blog-detail-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 📌 Başlık */
+#blog-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 📌 Blog Resmi */
+#blog-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* 📌 Blog İçeriği */
+#blog-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+}
+
+/* 📌 Meta Bilgiler */
+#blog-meta {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* 📌 Mobil Uyumluluk */
+@media (max-width: 768px) {
+    #blog-detail-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #blog-title {
+        font-size: 28px;
+    }
+
+    #blog-content {
+        font-size: 16px;
+    }
+}
+
+/* Yorumlar Bölümü */
+#comments-section {
+    margin-top: 40px;
+    padding: 30px 20px;
+    border-top: 2px solid #eee;
+    background-color: #fff;
+}
+
+#comments-section h2 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+/* Yorum Kartı */
+.comment {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+/* Kullanıcı Adı ve Tarih */
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment strong {
+    font-size: 16px;
+    color: #222;
+}
+
+.comment small {
+    font-size: 13px;
+    color: #888;
+}
+
+/* Yorum İçeriği */
+.comment p {
+    margin: 0;
+    font-size: 15px;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* Yorum Formu */
+#commentForm {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+#commentForm h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#commentForm input,
+#commentForm textarea {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 100%;
+}
+
+#commentForm textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#commentForm button {
+    align-self: flex-start;
+    padding: 10px 24px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#commentForm button:hover {
+    background-color: #45a049;
+}
+
+
+
+/* isim için ekliyoruz */
+.comment {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.comment-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.comment-date {
+  font-size: 13px;
+  color: #888;
+}
+
+.comment-text {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.6;
+}
