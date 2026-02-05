@@ -2,6 +2,10 @@
 
 Bu proje, Node.js ve MySQL kullanılarak geliştirilmiş dinamik bir blog uygulamasıdır. Kullanıcılar ve yöneticiler için ayrı arayüzler sunar.
 
+siteyi canlıda görmek isterseniz linke tıklayrak gidebilirsiniz. https://blog1-f397.onrender.com/user/index.html
+
+bu bir ücretsiz servistir bu yüzden bazı durumlarda çalışmayabilir veya deactive olmuş olabilir.
+
 ## Özellikler
 
 - **Yönetici Paneli:** Yazı ekleme, düzenleme, silme ve kategori yönetimi.
