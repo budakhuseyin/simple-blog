@@ -30,22 +30,23 @@ h2 {
 }
 
 /* Form Grubu */
-form {
+/* Form Grubu */
+main form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
 }
 
-label {
+main label {
     font-size: 18px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
 }
 
-input,
-textarea {
+main form input,
+main form textarea {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -56,36 +57,38 @@ textarea {
     transition: border-color 0.3s ease;
 }
 
-input:focus,
-textarea:focus {
+main form input:focus,
+main form textarea:focus {
     border-color: #38bdf8;
     outline: none;
 }
 
 /* Textarea Özelleştirmesi */
-textarea {
+main form textarea {
     min-height: 150px;
     resize: vertical;
 }
 
 /* Buton Stili */
-button {
-    background-color: #38bdf8;
+main form button {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
     color: white;
     padding: 15px 30px;
     font-size: 18px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
 }
 
-button:hover {
-    background-color: #007acc;
+main form button:hover {
+    background: linear-gradient(135deg, #1d4ed8, #6d28d9);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
 }
 
-button:active {
+main form button:active {
     background-color: #005fa3;
 }
 
@@ -100,17 +103,51 @@ button:active {
         font-size: 28px;
     }
 
-    label {
+    main label {
         font-size: 16px;
     }
 
-    input,
-    textarea {
+    main form input,
+    main form textarea {
         font-size: 14px;
     }
 
-    button {
+    main form button {
         padding: 12px 25px;
         font-size: 16px;
     }
+}
+
+/* ========================
+   DARK MODE OVERRIDES
+======================== */
+body.dark-mode {
+    background-color: #0f172a;
+}
+
+body.dark-mode main {
+    background-color: #1e293b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #f1f5f9;
+}
+
+body.dark-mode h2 {
+    color: #f1f5f9;
+}
+
+body.dark-mode main label {
+    color: #e2e8f0;
+}
+
+body.dark-mode main form input,
+body.dark-mode main form textarea {
+    background-color: #334155;
+    border-color: #475569;
+    color: #f1f5f9;
+}
+
+body.dark-mode main form input:focus,
+body.dark-mode main form textarea:focus {
+    border-color: #38bdf8;
+    background-color: #1e293b;
 }

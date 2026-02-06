@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function fetchPosts() {
     try {
+      showSkeleton(); // Yükleme başlarken skeleton göster (Kategoriler beklenmeden)
       const urlParams = new URLSearchParams(window.location.search);
       const categoryParam = urlParams.get("category");
       let endpoint = `${API_BASE}/api/posts`;
@@ -13,54 +14,134 @@ document.addEventListener("DOMContentLoaded", async () => {
         endpoint += `?category=${categoryParam}`;
       }
 
+      // 1. Kategorileri çek
+      const categoriesResponse = await fetch(`${API_BASE}/api/categories`);
+      const categories = await categoriesResponse.json();
+      const categoryMap = {};
+      categories.forEach(cat => {
+        categoryMap[cat.id] = cat.name;
+      });
+
+      // 2. Blogları çek
+
+      // 2. Blogları çek
       const response = await fetch(endpoint);
       let posts = await response.json();
+      let allPosts = posts; // Orijinal listeyi sakla
 
-      posts = posts.sort(
-        (a, b) =>
-          new Date(b.created_at) - new Date(a.created_at) || b.id - a.id
+      // Tarihe göre sırala
+      allPosts = allPosts.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at) || b.id - a.id
       );
 
-      if (!isBlogPage) {
-        posts = posts.slice(0, 4);
-      }
+      // Blog sayfasında değilsek sadece 4 tane göster, ama arama yapınca hepsini filtreleyeceğiz
+      const initialPosts = !isBlogPage ? allPosts.slice(0, 4) : allPosts;
 
-      postsContainer.innerHTML = "";
+      renderPosts(initialPosts, null, categoryMap, isBlogPage);
 
-      posts.forEach((post) => {
-        const imageUrl = post.image_url?.startsWith("http")
+      // Arama Dinleyicisi (Header içindeki input'u bekle)
+      const checkForSearchInput = setInterval(() => {
+        const searchInput = document.querySelector('input[name="search"]');
+        const searchForm = document.getElementById('searchForm');
+
+        if (searchInput && searchForm) {
+          clearInterval(checkForSearchInput);
+
+          // Eğer anasayfadaysak, formun submit olmasını engelle (enter'a basınca sayfayı yenilemesin)
+          if (!isBlogPage) {
+            searchForm.addEventListener("submit", (e) => {
+              e.preventDefault();
+            });
+          }
+
+          searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase();
+            const filteredPosts = allPosts.filter(post =>
+              post.title.toLowerCase().includes(query) ||
+              post.content.toLowerCase().includes(query)
+            );
+
+            // Eğer arama kutusu doluysa hepsini filtrele
+            if (query.length > 0) {
+              renderPosts(filteredPosts, null, categoryMap, false); // false = featured post'u iptal et
+            } else {
+              renderPosts(initialPosts, null, categoryMap, isBlogPage); // Orijinal haline dön
+            }
+          });
+        }
+      }, 500); // Yarım saniyede bir kontrol et (Header yüklenene kadar)
+
+    } catch (error) {
+      console.error("Blogları alırken hata oluştu:", error);
+      postsContainer.innerHTML = `<p style="color:red;">Bloglar yüklenemedi.</p>`;
+    }
+  }
+
+  function showSkeleton() {
+    const postsContainer = document.getElementById("posts-container");
+    postsContainer.innerHTML = "";
+
+    // 6 tane boş skeleton kart oluştur
+    const skeletonHTML = `
+      <div class="blog-card skeleton-card">
+          <div class="skeleton skeleton-image"></div>
+          <div class="blog-card-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text short"></div>
+              <div class="skeleton skeleton-meta"></div>
+          </div>
+      </div>
+    `.repeat(6);
+
+    postsContainer.innerHTML = skeletonHTML;
+  }
+
+  function renderPosts(postsToRender, _, categoryMap, enableFeatured) {
+    const postsContainer = document.getElementById("posts-container");
+    postsContainer.innerHTML = "";
+
+    if (postsToRender.length === 0) {
+      postsContainer.innerHTML = "<p style='text-align:center; width:100%; color:#666;'>Aradığınız kriterlere uygun yazı bulunamadı.</p>";
+      return;
+    }
+
+    postsToRender.forEach((post, index) => {
+      const imageUrl = post.image_url?.startsWith("http")
         ? post.image_url
         : `${API_BASE}${post.image_url || "/uploads/default.jpg"}`;
 
+      const categoryName = categoryMap[post.category_id] || 'Genel';
 
-        const categoryInfo = post.category_id
-          ? `<br><small>Kategori: ${post.category_id}</small>`
-          : "";
+      const postElement = document.createElement("div");
 
-        const postElement = document.createElement("div");
+      // Sadece ilk yüklemede ve anasayfada featured olsun, aramada olmasın
+      if (enableFeatured && index === 0) {
+        postElement.classList.add("featured-post");
+      } else {
         postElement.classList.add("blog-card");
-        postElement.setAttribute("data-id", post.id);
+      }
 
-        postElement.innerHTML = `
+      postElement.setAttribute("data-id", post.id);
+
+      postElement.innerHTML = `
           <div class="blog-card-image">
+              <span class="category-pill">${categoryName}</span>
               <img src="${imageUrl}" alt="${post.title}">
           </div>
           <div class="blog-card-content">
               <h3>${post.title}</h3>
               <p>${post.content.substring(0, 100)}...</p>
-              <div class="devamini-oku-wrapper">
-                  <a href="/user/blog-detail.html?id=${post.id}" class="devamini-oku">Devamını Oku</a>
-              </div>
               <small>Yazar ID: ${post.author_id} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
-              ${categoryInfo}
           </div>
         `;
-        postsContainer.appendChild(postElement);
+
+      postElement.addEventListener("click", () => {
+        window.location.href = `/user/blog-detail.html?id=${post.id}`;
       });
-    } catch (error) {
-      console.error("Blogları alırken hata oluştu:", error);
-      postsContainer.innerHTML = `<p style="color:red;">Bloglar yüklenemedi.</p>`;
-    }
+
+      postsContainer.appendChild(postElement);
+    });
   }
 
   fetchPosts();
@@ -108,3 +189,19 @@ function revealOnScroll() {
 }
 window.addEventListener("scroll", revealOnScroll);
 document.addEventListener("DOMContentLoaded", revealOnScroll);
+
+// ------------------------------------------
+// READING PROGRESS BAR
+// ------------------------------------------
+window.addEventListener("scroll", () => {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+  const scrolled = (scrollTop / scrollHeight) * 100;
+
+  const progressBar = document.getElementById("scroll-progress");
+  if (progressBar) {
+    progressBar.style.width = `${scrolled}%`;
+  }
+});

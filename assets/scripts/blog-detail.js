@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const blogImage = document.getElementById("blog-image");
             if (blog.image_url?.startsWith("http")) {
-              blogImage.src = blog.image_url;
+                blogImage.src = blog.image_url;
             } else {
-              blogImage.src = blog.image_url?.startsWith("http")
-              ? blog.image_url
-              : `https://blog1-f397.onrender.com${blog.image_url || "/uploads/default.jpg"}`;
+                blogImage.src = blog.image_url?.startsWith("http")
+                    ? blog.image_url
+                    : `https://blog1-f397.onrender.com${blog.image_url || "/uploads/default.jpg"}`;
 
             }
 
@@ -41,4 +41,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     fetchBlogDetails();
+});
+
+// ------------------------------------------
+// READING PROGRESS BAR
+// ------------------------------------------
+window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+    const scrolled = (scrollTop / scrollHeight) * 100;
+
+    const progressBar = document.getElementById("scroll-progress");
+    if (progressBar) {
+        progressBar.style.width = `${scrolled}%`;
+    }
 });

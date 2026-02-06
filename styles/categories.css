@@ -1,90 +1,90 @@
+/* Kategori Ekleme Formu */
+#category-form-section {
+  margin-bottom: 30px;
+  text-align: center;
+}
 
-  /* Kategori Ekleme Formu */
-  #category-form-section {
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  #add-category-form {
-    display: inline-block;
-  }
-  
-  #add-category-form input[type="text"] {
-    padding: 8px;
-    font-size: 16px;
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  #add-category-form button {
-    padding: 8px 16px;
-    font-size: 16px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1c40f;
-    color: #333;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  #add-category-form button:hover {
-    background-color: #e67e22;
-  }
-  
-  /* Kategori Listesi */
-  #categories-list-section {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  #categories-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  #categories-list li {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  #categories-list li:last-child {
-    border-bottom: none;
-  }
-  
-  /* Düzenle ve Sil Butonları */
-  #categories-list li button {
-    margin-left: 10px;
-    padding: 5px 10px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  #categories-list li button:first-of-type {
-    background-color: #3498db;
-    color: #fff;
-  }
-  
-  #categories-list li button:first-of-type:hover {
-    background-color: #2980b9;
-  }
-  
-  #categories-list li button:last-of-type {
-    background-color: #e74c3c;
-    color: #fff;
-  }
-  
-  #categories-list li button:last-of-type:hover {
-    background-color: #c0392b;
-  }
-  
+#add-category-form {
+  display: inline-block;
+}
+
+#add-category-form input[type="text"] {
+  padding: 8px;
+  font-size: 16px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-category-form button {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#add-category-form button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+  transform: translateY(-1px);
+}
+
+/* Kategori Listesi */
+#categories-list-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#categories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#categories-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#categories-list li:last-child {
+  border-bottom: none;
+}
+
+/* Düzenle ve Sil Butonları */
+#categories-list li button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#categories-list li button:first-of-type {
+  background-color: #3498db;
+  color: #fff;
+}
+
+#categories-list li button:first-of-type:hover {
+  background-color: #2980b9;
+}
+
+#categories-list li button:last-of-type {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+#categories-list li button:last-of-type:hover {
+  background-color: #c0392b;
+}

@@ -1,6 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-  waitForMenuElements(setupMenu);
+  waitForMenuElements(() => {
+    setupMenu();
+    initTheme(); // Menü (ve header) yüklendikten sonra temayı başlat
+  });
 });
+
+function initTheme() {
+  const toggleBtns = document.querySelectorAll("#theme-toggle, #desktop-theme-toggle");
+  const currentTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  // Kayıtlı tema varsa onu kullan, yoksa sistem tercihine bak
+  if (currentTheme === "dark" || (!currentTheme && prefersDark)) {
+    document.body.classList.add("dark-mode");
+    toggleBtns.forEach(btn => btn.textContent = "☀️");
+  }
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      let theme = "light";
+
+      if (document.body.classList.contains("dark-mode")) {
+        theme = "dark";
+        toggleBtns.forEach(b => b.textContent = "☀️");
+      } else {
+        toggleBtns.forEach(b => b.textContent = "🌙");
+      }
+      localStorage.setItem("theme", theme);
+    });
+  });
+}
 
 function waitForMenuElements(callback) {
   const observer = new MutationObserver(() => {

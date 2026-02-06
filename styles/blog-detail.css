@@ -59,83 +59,122 @@
 }
 
 /* Yorumlar Bölümü */
+/* Yorumlar Bölümü */
 #comments-section {
-    margin-top: 40px;
-    padding: 30px 20px;
-    border-top: 2px solid #eee;
-    background-color: #fff;
+    margin-top: 60px;
+    padding: 0;
+    border-top: none;
+    background-color: transparent;
 }
 
 #comments-section h2 {
-    font-size: 26px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Yorum Kartı */
-.comment {
+#comments-section h2::before {
+    content: "💬";
+    font-size: 24px;
+}
+
+/* Yorum Listesi */
+#comments-list {
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    position: relative;
+    gap: 20px;
 }
 
-/* Kullanıcı Adı ve Tarih */
+/* Yorum Kartı - Modern */
+.comment {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f1f5f9;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
 .comment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #f8fafc;
+    padding-bottom: 12px;
 }
 
-.comment strong {
+.comment-name {
+    font-weight: 700;
+    color: #334155;
     font-size: 16px;
-    color: #222;
-}
-
-.comment small {
-    font-size: 13px;
-    color: #888;
-}
-
-/* Yorum İçeriği */
-.comment p {
-    margin: 0;
-    font-size: 15px;
-    color: #444;
-    line-height: 1.6;
-}
-
-/* Yorum Formu */
-#commentForm {
-    margin-top: 35px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fafafa;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 500;
+    padding: 4px 10px;
+    background: #f8fafc;
+    border-radius: 20px;
+}
+
+.comment-text {
+    font-size: 16px;
+    color: #475569;
+    line-height: 1.7;
+}
+
+/* Yorum Formu - Chat Tarzı */
+#commentForm {
+    margin-top: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    border: 1px solid #e2e8f0;
 }
 
 #commentForm h3 {
     font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1e293b;
 }
 
 #commentForm input,
 #commentForm textarea {
-    padding: 12px 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
     width: 100%;
+    padding: 16px;
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    font-size: 15px;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+    /* Padding taşmasını önle */
+}
+
+#commentForm input:focus,
+#commentForm textarea:focus {
+    border-color: #3b82f6;
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 #commentForm textarea {
@@ -144,51 +183,96 @@
 }
 
 #commentForm button {
-    align-self: flex-start;
-    padding: 10px 24px;
-    background-color: #4CAF50;
+    margin-top: 10px;
+    align-self: flex-end;
+    /* Sağa yasla */
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: white;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
 }
 
 #commentForm button:hover {
-    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
 }
 
 
 
-/* isim için ekliyoruz */
-.comment {
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 14px;
-  margin-bottom: 15px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+/* Old legacy styles removed */
+
+/* ========================
+   DARK MODE OVERRIDES
+======================== */
+body.dark-mode #blog-detail-container {
+    background: #1e293b;
+    color: #f1f5f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.comment-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
+body.dark-mode #blog-title {
+    color: #f8fafc;
 }
 
-.comment-name {
-  font-weight: 600;
-  color: #2c3e50;
+body.dark-mode #blog-content {
+    color: #cbd5e1;
 }
 
-.comment-date {
-  font-size: 13px;
-  color: #888;
+body.dark-mode #blog-meta {
+    color: #94a3b8;
 }
 
-.comment-text {
-  font-size: 15px;
-  color: #444;
-  line-height: 1.6;
+body.dark-mode #comments-section {
+    background-color: #1e293b;
+    border-top-color: #334155;
+    color: #f1f5f9;
+}
+
+body.dark-mode #comments-section h2 {
+    color: #f1f5f9;
+}
+
+body.dark-mode .comment {
+    background-color: #334155;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    color: #f1f5f9;
+}
+
+body.dark-mode .comment-name {
+    color: #e2e8f0;
+}
+
+body.dark-mode .comment-text {
+    color: #cbd5e1;
+}
+
+body.dark-mode .comment-date {
+    color: #94a3b8;
+}
+
+body.dark-mode #commentForm {
+    background-color: #334155;
+    border-color: #475569;
+}
+
+body.dark-mode #commentForm h3 {
+    color: #f1f5f9;
+}
+
+body.dark-mode #commentForm input,
+body.dark-mode #commentForm textarea {
+    background-color: #1e293b;
+    border-color: #475569;
+    color: #f1f5f9;
+}
+
+body.dark-mode #commentForm input::placeholder,
+body.dark-mode #commentForm textarea::placeholder {
+    color: #94a3b8;
 }

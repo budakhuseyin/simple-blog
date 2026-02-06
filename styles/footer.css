@@ -1,73 +1,97 @@
-
+/* Footer */
 footer {
-    background: #121212;
-    color: white;
-    padding: 50px 0;
+    background: linear-gradient(to right, #0f172a, #1e1b4b);
+    /* Deep Navy Gradient */
+    color: #e2e8f0;
+    /* Silver text */
+    padding: 70px 0 30px;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     position: relative;
+    border-top: 4px solid #3b82f6;
+    /* Accent border matching header */
 }
 
 .footer-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: auto;
     padding: 0 20px;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.footer-about, .footer-links, .footer-social {
+.footer-about,
+.footer-links,
+.footer-social {
     width: 30%;
-    text-align: center;
+    text-align: left;
 }
 
-.footer-links h3 {
-    margin-bottom: 10px;
-    color: #f1c40f;
-    font-size: 18px;
+.footer-about h3,
+.footer-links h3,
+.footer-social h3 {
+    margin-bottom: 25px;
+    color: #60a5fa;
+    /* Light Blue accent */
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+.footer-about p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #94a3b8;
 }
 
 .footer-links ul {
     list-style: none;
     padding: 0;
     display: flex;
-    gap: 15px;
-    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .footer-links li {
-    display: inline;
+    display: block;
 }
 
 .footer-links a {
-    color: #ddd;
+    color: #cbd5e1;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out;
-    padding-bottom: 3px;
-    border-bottom: 2px solid transparent;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
 }
 
 .footer-links a:hover {
-    color: #f1c40f;
-    border-bottom: 2px solid #f1c40f;
+    color: #22d3ee;
+    /* Cyan Glow */
+    padding-left: 8px;
+    text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
 }
 
 .footer-bottom {
-    background: #1a1a1a;
-    padding: 15px;
+    background: #020617;
+    /* Darkest Navy */
+    padding: 25px;
     font-size: 14px;
-    color: #bbb;
+    color: #64748b;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .footer-bottom a {
-    color: #f1c40f;
+    color: #60a5fa;
     text-decoration: none;
+    font-weight: 600;
 }
 
 .footer-bottom a:hover {
+    color: #93c5fd;
     text-decoration: underline;
 }
 
@@ -77,9 +101,17 @@ footer {
         text-align: center;
     }
 
-    .footer-about, .footer-links, .footer-social {
+    .footer-about,
+    .footer-links,
+    .footer-social {
         width: 100%;
         margin-bottom: 20px;
+    }
+
+    .footer-about,
+    .footer-links,
+    .footer-social {
+        text-align: center;
     }
 
     .footer-links ul {
@@ -127,9 +159,10 @@ footer {
     padding: 10px 14px;
     border-radius: 50%;
     text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
+
 .go-top:hover {
     transform: scale(1.1);
 }
