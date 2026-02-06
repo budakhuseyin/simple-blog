@@ -28,7 +28,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             document.getElementById("blog-title").textContent = blog.title;
             document.getElementById("blog-content").innerHTML = blog.content;
-            document.getElementById("blog-meta").textContent = `Yazar: ${blog.author_name || 'Bilinmiyor'} | Yayınlanma: ${new Date(blog.created_at).toLocaleDateString()}`;
+
+            // Reading Time Calculation
+            const textContent = blog.content.replace(/<[^>]*>?/gm, ''); // Strip HTML tags
+            const wordCount = textContent.trim().split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200);
+
+            document.getElementById("blog-meta").textContent = `Yazar: ${blog.author_name || 'Bilinmiyor'} | Yayınlanma: ${new Date(blog.created_at).toLocaleDateString()} | ⏱️ ${readingTime} dk okuma`;
 
             const blogImage = document.getElementById("blog-image");
             if (blog.image_url?.startsWith("http")) {

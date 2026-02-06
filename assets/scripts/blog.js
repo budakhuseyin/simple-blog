@@ -50,7 +50,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="devamini-oku-wrapper">
                 <a href="blog-detail.html?${post.slug ? 'slug=' + post.slug : 'id=' + post.id}" class="devamini-oku">Devamını Oku</a>
             </div>
-            <small>Yazar: ${post.author_name || 'Bilinmiyor'} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
+            <small>
+                Yazar: ${post.author_name || 'Bilinmiyor'} | 
+                📅 ${new Date(post.created_at).toLocaleDateString()} | 
+                ⏱️ ${Math.ceil(post.content.replace(/<[^>]*>?/gm, '').split(/\s+/).length / 200)} dk
+            </small>
         </div>
       `;
 
