@@ -276,3 +276,80 @@ body.dark-mode #commentForm input::placeholder,
 body.dark-mode #commentForm textarea::placeholder {
     color: #94a3b8;
 }
+
+/* ========================
+   SHARE BUTTONS
+======================== */
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    /* Ensure responsiveness */
+    gap: 15px;
+    margin: 30px 0;
+    justify-content: flex-start;
+    /* Align left */
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.share-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.share-btn {
+    padding: 12px 20px;
+    border-radius: 50px;
+    /* Fully rounded */
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.share-btn svg {
+    fill: currentColor;
+    transition: transform 0.3s;
+}
+
+.share-btn:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.share-btn:hover svg {
+    transform: scale(1.2);
+    /* Icon pop */
+}
+
+/* Brand Colors with Gradients */
+.whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.twitter {
+    background: linear-gradient(135deg, #1DA1F2 0%, #0d8bd9 100%);
+}
+
+.linkedin {
+    background: linear-gradient(135deg, #0077b5 0%, #005582 100%);
+}
+
+/* Dark Mode Support */
+body.dark-mode .share-buttons {
+    border-top-color: #334155;
+}
+
+body.dark-mode .share-label {
+    color: #cbd5e1;
+}
