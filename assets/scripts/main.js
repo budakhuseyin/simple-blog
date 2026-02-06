@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const postsContainer = document.getElementById("posts-container");
   const isBlogPage = window.location.pathname.includes("blog.html");
-  const API_BASE = "https://blog1-f397.onrender.com";
+  const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000"
+    : "https://blog1-f397.onrender.com";
 
   async function fetchPosts() {
     try {
@@ -107,6 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     postsToRender.forEach((post, index) => {
+      console.log("Post Data:", post); // Debugging slug issue
       const imageUrl = post.image_url?.startsWith("http")
         ? post.image_url
         : `${API_BASE}${post.image_url || "/uploads/default.jpg"}`;
@@ -137,7 +140,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
 
       postElement.addEventListener("click", () => {
-        window.location.href = `/user/blog-detail.html?id=${post.id}`;
+        const identifier = post.slug ? `slug=${post.slug}` : `id=${post.id}`;
+        window.location.href = `/user/blog-detail.html?${identifier}`;
       });
 
       postsContainer.appendChild(postElement);

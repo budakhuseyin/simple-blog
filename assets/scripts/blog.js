@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const postsContainer = document.getElementById("posts-container");
-  const API_BASE = "https://blog1-f397.onrender.com";
+  const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000"
+    : "https://blog1-f397.onrender.com";
 
   const urlParams = new URLSearchParams(window.location.search);
   const categoryParam = urlParams.get("category");
@@ -31,8 +33,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     posts.forEach(post => {
       const imageUrl = post.image_url?.startsWith("http")
-      ? post.image_url
-      : `${API_BASE}${post.image_url || "/uploads/default.jpg"}`;
+        ? post.image_url
+        : `${API_BASE}${post.image_url || "/uploads/default.jpg"}`;
 
 
       const postElement = document.createElement("div");
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <h3>${post.title}</h3>
             <p>${post.content.substring(0, 100)}...</p>
             <div class="devamini-oku-wrapper">
-                <a href="blog-detail.html?id=${post.id}" class="devamini-oku">Devamını Oku</a>
+                <a href="blog-detail.html?${post.slug ? 'slug=' + post.slug : 'id=' + post.id}" class="devamini-oku">Devamını Oku</a>
             </div>
             <small>Yazar ID: ${post.author_id} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
         </div>

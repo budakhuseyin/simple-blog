@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const postsTableBody = document.querySelector("#posts-table tbody");
   const token = localStorage.getItem("adminToken");
-  const API_BASE = "https://blog1-f397.onrender.com/api";
+  const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000/api"
+    : "https://blog1-f397.onrender.com/api";
 
   if (!token) {
     alert("Yetkisiz erişim! Lütfen giriş yapın.");

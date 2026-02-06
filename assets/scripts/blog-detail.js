@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? "http://localhost:5000"
+        : "https://blog1-f397.onrender.com";
     const urlParams = new URLSearchParams(window.location.search);
     const blogId = urlParams.get("id");
+    const blogSlug = urlParams.get("slug");
+    const identifier = blogSlug || blogId;
 
-    if (!blogId) {
-        console.error("Blog ID bulunamadı!");
+    if (!identifier) {
+        console.error("Blog ID veya Slug bulunamadı!");
         return;
     }
 
-    console.log("Blog ID:", blogId); // ✅ Blog ID'yi konsola yaz
+    console.log("Blog Identifier:", identifier); // ✅ Blog ID/Slug'i konsola yaz
 
     async function fetchBlogDetails() {
         try {
-            const response = await fetch(`https://blog1-f397.onrender.com/api/posts/${blogId}`);
+            const response = await fetch(`${API_BASE}/api/posts/${identifier}`);
             const blog = await response.json();
 
             console.log("Gelen Blog Verisi:", blog); // ✅ API'den gelen veriyi kontrol et
@@ -31,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             } else {
                 blogImage.src = blog.image_url?.startsWith("http")
                     ? blog.image_url
-                    : `https://blog1-f397.onrender.com${blog.image_url || "/uploads/default.jpg"}`;
+                    : `${API_BASE}${blog.image_url || "/uploads/default.jpg"}`;
 
             }
 

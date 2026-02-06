@@ -5,6 +5,7 @@ const db = require("../config/db");
 const fs = require("fs");
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
+const { createSlug } = require("../utils/slugHelper");
 
 // 1) Blog Ekleme
 router.post("/add", (req, res) => {
@@ -25,11 +26,22 @@ router.post("/add", (req, res) => {
         imagePublicId = result.public_id;
       }
 
+      let slug = createSlug(title);
+      let counter = 1;
+
+      // Slug benzersiz mi kontrol et
+      while (true) {
+        const check = await db.query("SELECT id FROM posts WHERE slug = $1", [slug]);
+        if (check.rows.length === 0) break;
+        slug = `${createSlug(title)}-${counter}`;
+        counter++;
+      }
+
       const query = `
-        INSERT INTO posts (title, content, author_id, image_url, category_id, image_public_id)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO posts (title, content, author_id, image_url, category_id, image_public_id, slug)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
       `;
-      await db.query(query, [title, content, author_id, imageUrl, category_id, imagePublicId]);
+      await db.query(query, [title, content, author_id, imageUrl, category_id, imagePublicId, slug]);
 
       res.json({
         success: true,
@@ -48,7 +60,7 @@ router.get("/", async (req, res) => {
   try {
     const categoryId = req.query.category;
     let sql = `
-      SELECT id, title, content, author_id, created_at, image_url, category_id
+      SELECT id, title, content, author_id, created_at, image_url, category_id, slug
       FROM posts
     `;
     const params = [];
@@ -71,13 +83,28 @@ router.get("/", async (req, res) => {
 // 3) Tekil blog detay
 router.get("/:id", async (req, res) => {
   try {
-    const postId = req.params.id;
-    const sql = `
-      SELECT id, title, content, author_id, created_at, image_url, category_id
-      FROM posts
-      WHERE id = $1
-    `;
-    const result = await db.query(sql, [postId]);
+    const param = req.params.id;
+    let sql = "";
+    let queryParams = [];
+
+    // Eğer parametre sayı ise ID ile ara, değilse Slug ile ara
+    if (!isNaN(param)) {
+      sql = `
+        SELECT id, title, content, author_id, created_at, image_url, category_id, slug
+        FROM posts
+        WHERE id = $1
+      `;
+      queryParams = [param];
+    } else {
+      sql = `
+        SELECT id, title, content, author_id, created_at, image_url, category_id, slug
+        FROM posts
+        WHERE slug = $1
+      `;
+      queryParams = [param];
+    }
+
+    const result = await db.query(sql, queryParams);
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: "Blog bulunamadı" });
