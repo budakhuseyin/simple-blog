@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Paneli</title>
     <link rel="stylesheet" href="../styles/admin.css">
 </head>
+
 <body>
     <div class="admin-container">
         <aside class="sidebar">
@@ -20,11 +22,30 @@
             </ul>
         </aside>
         <main class="content">
-            <h1>Hoş geldin, Admin!</h1>
-            <p>Buradan blog yazılarını yönetebilir, yeni yazılar ekleyebilir veya düzenleyebilirsin.</p>
+            <h1>Hoş geldin, Admin! 👋</h1>
+            <p>Blog yönetimi panelinden sitenizi kolayca yönetebilirsiniz.</p>
+
+            <div class="dashboard-widgets">
+                <div class="widget">
+                    <h3>📝 Blog Yazıları</h3>
+                    <p>Yazılarını düzenle, sil veya yenisini ekle.</p>
+                    <a href="manage-posts.html" class="widget-btn">Yönet</a>
+                </div>
+                <div class="widget">
+                    <h3>➕ Yeni İçerik</h3>
+                    <p>Hemen yeni bir blog yazısı oluştur.</p>
+                    <a href="new-post.html" class="widget-btn">Oluştur</a>
+                </div>
+                <div class="widget">
+                    <h3>💬 Yorumlar</h3>
+                    <p>Okuyucu yorumlarını incele ve onayla.</p>
+                    <a href="manage-comments.html" class="widget-btn">İncele</a>
+                </div>
+            </div>
         </main>
     </div>
 
     <script src="../assets/scripts/admin-dashboard.js"></script>
 </body>
+
 </html>
