@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="blog-card-content">
               <h3>${post.title}</h3>
               <p>${post.content.substring(0, 100)}...</p>
-              <small>Yazar ID: ${post.author_id} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
+              <small>Yazar: ${post.author_name || 'Bilinmiyor'} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
           </div>
         `;
 

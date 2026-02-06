@@ -60,8 +60,9 @@ router.get("/", async (req, res) => {
   try {
     const categoryId = req.query.category;
     let sql = `
-      SELECT id, title, content, author_id, created_at, image_url, category_id, slug
+      SELECT posts.id, posts.title, posts.content, posts.author_id, posts.created_at, posts.image_url, posts.category_id, posts.slug, users.username AS author_name
       FROM posts
+      LEFT JOIN users ON posts.author_id = users.id
     `;
     const params = [];
 
@@ -90,16 +91,18 @@ router.get("/:id", async (req, res) => {
     // Eğer parametre sayı ise ID ile ara, değilse Slug ile ara
     if (!isNaN(param)) {
       sql = `
-        SELECT id, title, content, author_id, created_at, image_url, category_id, slug
+        SELECT posts.id, posts.title, posts.content, posts.author_id, posts.created_at, posts.image_url, posts.category_id, posts.slug, users.username AS author_name
         FROM posts
-        WHERE id = $1
+        LEFT JOIN users ON posts.author_id = users.id
+        WHERE posts.id = $1
       `;
       queryParams = [param];
     } else {
       sql = `
-        SELECT id, title, content, author_id, created_at, image_url, category_id, slug
+        SELECT posts.id, posts.title, posts.content, posts.author_id, posts.created_at, posts.image_url, posts.category_id, posts.slug, users.username AS author_name
         FROM posts
-        WHERE slug = $1
+        LEFT JOIN users ON posts.author_id = users.id
+        WHERE posts.slug = $1
       `;
       queryParams = [param];
     }

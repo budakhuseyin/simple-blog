@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             document.getElementById("blog-title").textContent = blog.title;
             document.getElementById("blog-content").innerHTML = blog.content;
-            document.getElementById("blog-meta").textContent = `Yazar ID: ${blog.author_id} | Yayınlanma: ${new Date(blog.created_at).toLocaleDateString()}`;
+            document.getElementById("blog-meta").textContent = `Yazar: ${blog.author_name || 'Bilinmiyor'} | Yayınlanma: ${new Date(blog.created_at).toLocaleDateString()}`;
 
             const blogImage = document.getElementById("blog-image");
             if (blog.image_url?.startsWith("http")) {

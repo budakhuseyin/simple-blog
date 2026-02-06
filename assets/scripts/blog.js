@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="devamini-oku-wrapper">
                 <a href="blog-detail.html?${post.slug ? 'slug=' + post.slug : 'id=' + post.id}" class="devamini-oku">Devamını Oku</a>
             </div>
-            <small>Yazar ID: ${post.author_id} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
+            <small>Yazar: ${post.author_name || 'Bilinmiyor'} | Yayınlanma: ${new Date(post.created_at).toLocaleDateString()}</small>
         </div>
       `;
 
