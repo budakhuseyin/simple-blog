@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesajlar - Admin Paneli</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Paneli</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="new-post.html"><i class="fas fa-pen"></i> Yeni Yazı Ekle</a></li>
+                <li><a href="manage-posts.html"><i class="fas fa-list"></i> Yazıları Yönet</a></li>
+                <li><a href="manage-comments.html"><i class="fas fa-comments"></i> Yorumları Yönet</a></li>
+                <li><a href="messages.html" class="active"><i class="fas fa-envelope"></i> Mesajlar</a></li>
+                <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Gelen Mesajlar</h1>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="inbox" onclick="switchTab('inbox')">
+                        <i class="fas fa-inbox"></i> Gelen Kutusu
+                    </button>
+                    <button class="tab-btn" data-tab="archive" onclick="switchTab('archive')">
+                        <i class="fas fa-archive"></i> Arşiv
+                    </button>
+                </div>
+            </header>
+
+            <section class="content">
+                <div id="messages-list">
+                    <p class="empty-state">Mesajlar yükleniyor...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/scripts/admin-messages.js"></script>
+    <script>
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+
+</html>

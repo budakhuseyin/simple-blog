@@ -41,6 +41,7 @@ app.use('/api/posts', postsRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/comments', commentsRoutes);
+app.use('/api/contact', require('./routes/contact'));
 
 // Hata yönetimi
 app.use((err, req, res, next) => {

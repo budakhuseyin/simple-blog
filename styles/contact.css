@@ -1,9 +1,186 @@
 /* Genel Sayfa Stili */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fb;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    /* Slate 50 */
     margin: 0;
     padding: 0;
+    color: #334155;
+}
+
+/* Header ve Footer Yükleme Alanları */
+#header-placeholder,
+#footer-placeholder {
+    width: 100%;
+}
+
+/* Main Container */
+main {
+    width: 100%;
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e293b;
+    /* Slate 800 */
+    margin-bottom: 10px;
+}
+
+main p {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* Form Layout */
+main form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    /* Center items horizontally */
+    width: 100%;
+}
+
+/* Form Groups (Divs) */
+main form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Ensure container takes full width */
+    text-align: left;
+    /* Keep labels left aligned */
+}
+
+/* Labels */
+main label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Inputs & Textarea */
+main form input,
+main form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+    color: #1e293b;
+    font-family: inherit;
+}
+
+main form input:focus,
+main form textarea:focus {
+    border-color: #6366f1;
+    background-color: white;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Textarea height */
+main form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* Submit Button */
+main form button {
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    color: white;
+    padding: 16px 48px;
+    /* Wider button */
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+    margin-top: 10px;
+    width: 100%;
+    /* Full width on mobile, max-width on desktop */
+    max-width: 200px;
+    /* Limit button width */
+}
+
+main form button:hover {
+    background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+}
+
+main form button:active {
+    transform: translateY(0);
+}
+
+main form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    main {
+        width: 90%;
+        margin: 30px auto;
+        padding: 25px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+body.dark-mode main {
+    background-color: #1e293b;
+    box-shadow: none;
+    border: 1px solid #334155;
+}
+
+body.dark-mode h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode main p {
+    color: #94a3b8;
+}
+
+body.dark-mode main label {
+    color: #cbd5e1;
+}
+
+body.dark-mode main form input,
+body.dark-mode main form textarea {
+    background-color: #0f172a;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+body.dark-mode main form input:focus,
+body.dark-mode main form textarea:focus {
+    border-color: #6366f1;
+    background-color: #0f172a;
 }
 
 /* Header ve Footer Yükleme Alanları */
