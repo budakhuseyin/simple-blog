@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         (a, b) => new Date(b.created_at) - new Date(a.created_at) || b.id - a.id
       );
 
-      // Blog sayfasında değilsek sadece 4 tane göster
-      const initialPosts = !isBlogPage ? allPosts.slice(0, 4) : allPosts;
+      // Blog sayfasında değilsek sadece 6 tane göster
+      const initialPosts = !isBlogPage ? allPosts.slice(0, 6) : allPosts;
 
       renderPosts(initialPosts, null, categoryMap, isBlogPage);
 
