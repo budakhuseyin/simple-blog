@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
           <div class="blog-card-content">
               <h3>${post.title}</h3>
-              <p>${post.content.substring(0, 100)}...</p>
+              <p>${post.content.replace(/<[^>]*>?/gm, '').substring(0, 100)}...</p>
               <small>
                 Yazar: ${post.author_name || 'Bilinmiyor'} | 
                 📅 ${new Date(post.created_at).toLocaleDateString()} | 

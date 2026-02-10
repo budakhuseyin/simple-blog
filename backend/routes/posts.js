@@ -38,10 +38,10 @@ router.post("/add", (req, res) => {
       }
 
       const query = `
-        INSERT INTO posts (title, content, author_id, image_url, category_id, image_public_id, slug)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO posts (title, content, author_id, image_url, category_id, image_public_id, slug, created_at)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       `;
-      await db.query(query, [title, content, author_id, imageUrl, category_id, imagePublicId, slug]);
+      await db.query(query, [title, content, author_id, imageUrl, category_id, imagePublicId, slug, new Date()]);
 
       res.json({
         success: true,

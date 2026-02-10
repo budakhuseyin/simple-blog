@@ -350,6 +350,35 @@ body.dark-mode .share-buttons {
     border-top-color: #334155;
 }
 
+
 body.dark-mode .share-label {
     color: #cbd5e1;
+}
+
+/* 📌 Mobil Uyumluluk (Share Buttons) - Ensure this is LAST */
+@media (max-width: 768px) {
+    .share-buttons {
+        gap: 6px !important;
+        margin: 10px 0 !important;
+    }
+
+    .share-btn {
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+        border-radius: 50px !important;
+        /* Keep rounded look but smaller */
+        height: auto !important;
+        width: fit-content !important;
+    }
+
+    .share-btn svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    .share-label {
+        font-size: 13px !important;
+        margin-bottom: 5px !important;
+        width: 100%;
+    }
 }
