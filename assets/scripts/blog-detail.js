@@ -79,14 +79,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 // READING PROGRESS BAR
 // ------------------------------------------
 window.addEventListener("scroll", () => {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-    const scrolled = (scrollTop / scrollHeight) * 100;
-
     const progressBar = document.getElementById("scroll-progress");
-    if (progressBar) {
-        progressBar.style.width = `${scrolled}%`;
+    const blogContent = document.getElementById("blog-detail-container");
+
+    if (progressBar && blogContent) {
+        const contentBox = blogContent.getBoundingClientRect();
+        const contentHeight = contentBox.height;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const elementTop = blogContent.offsetTop;
+
+        // Calculate progress based on how much of the content has been scrolled past
+        // We want 0% when the top of content enters view, and 100% when bottom leaves view (or user finishes reading)
+        // Adjusted: 0% at start, 100% when bottom of content aligns with bottom of viewport
+
+        const scrolled = scrollTop + windowHeight - elementTop;
+        const percentage = (scrolled / contentHeight) * 100;
+
+        // Clamp between 0 and 100
+        const width = Math.min(100, Math.max(0, percentage));
+
+        progressBar.style.width = `${width}%`;
     }
 });
