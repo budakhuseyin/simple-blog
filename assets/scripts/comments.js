@@ -9,8 +9,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const API_BASE = "https://blog1-f397.onrender.com/api";
 
   if (!postId) {
-    console.warn("Post ID eksik.");
-    return;
+    // ID yoksa slug var mı bak?
+    const slug = urlParams.get("slug");
+    if (slug) {
+      // Slug varsa ID'yi sunucudan öğrenmemiz gerek
+      fetch(`${API_BASE}/posts/${slug}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.id) {
+            // ID'yi bulduk, global değişkene ata ve yorumları çek
+            window.currentPostId = data.id;
+            fetchComments(data.id);
+          } else {
+            console.error("Slug ile post bulunamadı");
+          }
+        })
+        .catch(err => console.error("Post ID çözülemedi:", err));
+
+      // Return etme, fetchComments içinde ID kontrolü yapacağız veya parametre olarak geçeceğiz
+    } else {
+      console.warn("Post ID veya Slug eksik.");
+    }
+  } else {
+    // ID varsa direkt kullan
+    window.currentPostId = postId;
+    fetchComments(postId);
   }
 
   // XSS koruması
@@ -28,9 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Yorumları listele
-  async function fetchComments() {
+  async function fetchComments(id) {
+    // Eğer ID parametre olarak gelmediyse globalden al
+    const targetId = id || window.currentPostId;
+    if (!targetId) return;
+
     try {
-      const res = await fetch(`${API_BASE}/comments?post_id=${postId}`);
+      const res = await fetch(`${API_BASE}/comments?post_id=${targetId}`);
       const comments = await res.json();
 
       if (!Array.isArray(comments)) throw new Error("Yorumlar listelenemedi");
@@ -69,14 +96,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(`${API_BASE}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ post_id: postId, name, comment })
+        body: JSON.stringify({ post_id: window.currentPostId, name, comment })
       });
 
       if (!res.ok) throw new Error("Gönderim başarısız");
 
       commentForm.reset();
       messageBox.innerHTML = `<p style="color: green;">✅ Yorum gönderildi.</p>`;
-      fetchComments();
+      fetchComments(window.currentPostId);
     } catch (err) {
       console.error("Yorum gönderme hatası:", err);
       messageBox.innerHTML = `<p style="color:red;">❌ Gönderim başarısız.</p>`;
