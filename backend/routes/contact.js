@@ -22,34 +22,41 @@ router.post('/', async (req, res) => {
         // 2️⃣ E-posta Gönder (Admin'e Bildirim)
         console.log("E-posta gönderimi başlıyor...");
         if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-            console.log(`E-posta yapılandırması: User=${process.env.EMAIL_USER}, Pass=${process.env.EMAIL_PASS ? '********' : 'EKSİK'}`);
+            console.log(`[DEBUG] E-posta yapılandırması: User=${process.env.EMAIL_USER}`);
 
             const transporter = nodemailer.createTransport({
-                service: 'gmail', // Built-in service configuration
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false, // upgrade later with STARTTLS
+                requireTLS: true,
+                logger: true, // Log to console
+                debug: true,  // Include SMTP traffic in logs
                 auth: {
                     user: process.env.EMAIL_USER,
                     pass: process.env.EMAIL_PASS
                 },
                 tls: {
-                    rejectUnauthorized: false // Render/Cloud ortamlarında SSL hatalarını önler
-                },
-                connectionTimeout: 10000 // 10 seconds timeout
+                    rejectUnauthorized: false
+                }
             });
 
             const mailOptions = {
                 from: `"Blog İletişim" <${process.env.EMAIL_USER}>`,
                 to: 'huseyinbudak904@gmail.com',
-                replyTo: email, // Gönderen kişinin mailine yanıt verilebilsin
+                replyTo: email,
                 subject: `Yeni Mesaj: ${name}`,
-                text: `Gönderen: ${name} (${email})\n\nMesaj:\n${message}`
+                text: `Gönderen: ${name} (${email})\n\nMesaj:\n${message}`,
             };
 
             // Send mail
+            console.log("[DEBUG] Transporter oluşturuldu, mail gönderiliyor...");
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    console.error("❌ E-POSTA HATASI:", error);
+                    console.error("❌ E-POSTA HATASI (Detaylı):", JSON.stringify(error, null, 2));
+                    console.error("Hata Mesajı:", error.message);
                 } else {
                     console.log('✅ E-posta gönderildi:', info.messageId);
+                    console.log('SMTP Yanıtı:', info.response);
                 }
             });
         } else {
