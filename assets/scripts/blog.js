@@ -13,7 +13,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     endpoint += `?category=${categoryParam}`;
   }
 
+  function showSkeleton() {
+    postsContainer.innerHTML = "";
+    const skeletonHTML = `
+      <div class="blog-card skeleton-card">
+          <div class="skeleton skeleton-image"></div>
+          <div class="blog-card-content">
+              <div class="skeleton skeleton-title"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text short"></div>
+              <div class="skeleton skeleton-meta"></div>
+          </div>
+      </div>
+    `.repeat(6);
+    postsContainer.innerHTML = skeletonHTML;
+  }
+
   try {
+    showSkeleton(); // Yükleme başlarken skeleton göster
     const response = await fetch(endpoint);
     let posts = await response.json();
 
