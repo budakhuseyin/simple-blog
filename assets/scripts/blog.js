@@ -31,6 +31,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     showSkeleton(); // Yükleme başlarken skeleton göster
+
+    // 1. Kategorileri çek
+    const categoriesResponse = await fetch(`${API_BASE}/api/categories`);
+    const categories = await categoriesResponse.json();
+    const categoryMap = {};
+    categories.forEach(cat => {
+      categoryMap[cat.id] = cat.name;
+    });
+
+    // 2. Blogları çek
     const response = await fetch(endpoint);
     let posts = await response.json();
 
@@ -53,20 +63,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         ? post.image_url
         : `${API_BASE}${post.image_url || "/uploads/default.jpg"}`;
 
+      const categoryName = categoryMap[post.category_id] || 'Genel';
 
       const postElement = document.createElement("div");
       postElement.classList.add("blog-card");
 
       postElement.innerHTML = `
         <div class="blog-card-image">
+            <span class="category-pill">${categoryName}</span>
             <img src="${imageUrl}" alt="${post.title}">
         </div>
         <div class="blog-card-content">
             <h3>${post.title}</h3>
-            <p>${post.content.substring(0, 100)}...</p>
-            <div class="devamini-oku-wrapper">
-                <a href="blog-detail.html?${post.slug ? 'slug=' + post.slug : 'id=' + post.id}" class="devamini-oku">Devamını Oku</a>
-            </div>
+            <p>${post.content.replace(/<[^>]*>?/gm, '').substring(0, 100)}...</p>
             <small>
                 Yazar: ${post.author_name || 'Bilinmiyor'} | 
                 📅 ${new Date(post.created_at).toLocaleDateString()} | 
@@ -74,6 +83,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             </small>
         </div>
       `;
+
+      postElement.addEventListener("click", () => {
+        const identifier = post.slug ? `slug=${post.slug}` : `id=${post.id}`;
+        window.location.href = `blog-detail.html?${identifier}`;
+      });
 
       postsContainer.appendChild(postElement);
     });

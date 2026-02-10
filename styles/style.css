@@ -374,6 +374,9 @@ h6 {
 
 .blog-card-content {
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .blog-card-content h3 {
