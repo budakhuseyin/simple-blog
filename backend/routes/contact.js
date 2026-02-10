@@ -26,12 +26,12 @@ router.post('/', async (req, res) => {
 
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
-                port: 587,
-                secure: false, // TLS
+                port: 465,
+                secure: true, // SSL
                 logger: true,
                 debug: true,
                 family: 4, // IPv4 only
-                localAddress: '0.0.0.0', // ⚠️ Force binding to IPv4 interface (Fixes Local :::0 error)
+                localAddress: '0.0.0.0', // Force IPv4 interface binding
                 auth: {
                     user: process.env.EMAIL_USER,
                     pass: process.env.EMAIL_PASS
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
                 tls: {
                     rejectUnauthorized: false
                 },
-                connectionTimeout: 20000 // 20s
+                connectionTimeout: 30000 // 30s timeout
             });
 
             const mailOptions = {
