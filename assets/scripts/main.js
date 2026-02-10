@@ -36,42 +36,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         (a, b) => new Date(b.created_at) - new Date(a.created_at) || b.id - a.id
       );
 
-      // Blog sayfasında değilsek sadece 4 tane göster, ama arama yapınca hepsini filtreleyeceğiz
+      // Blog sayfasında değilsek sadece 4 tane göster
       const initialPosts = !isBlogPage ? allPosts.slice(0, 4) : allPosts;
 
       renderPosts(initialPosts, null, categoryMap, isBlogPage);
-
-      // Arama Dinleyicisi (Header içindeki input'u bekle)
-      const checkForSearchInput = setInterval(() => {
-        const searchInput = document.querySelector('input[name="search"]');
-        const searchForm = document.getElementById('searchForm');
-
-        if (searchInput && searchForm) {
-          clearInterval(checkForSearchInput);
-
-          // Eğer anasayfadaysak, formun submit olmasını engelle (enter'a basınca sayfayı yenilemesin)
-          if (!isBlogPage) {
-            searchForm.addEventListener("submit", (e) => {
-              e.preventDefault();
-            });
-          }
-
-          searchInput.addEventListener("input", (e) => {
-            const query = e.target.value.toLowerCase();
-            const filteredPosts = allPosts.filter(post =>
-              post.title.toLowerCase().includes(query) ||
-              post.content.toLowerCase().includes(query)
-            );
-
-            // Eğer arama kutusu doluysa hepsini filtrele
-            if (query.length > 0) {
-              renderPosts(filteredPosts, null, categoryMap, false); // false = featured post'u iptal et
-            } else {
-              renderPosts(initialPosts, null, categoryMap, isBlogPage); // Orijinal haline dön
-            }
-          });
-        }
-      }, 500); // Yarım saniyede bir kontrol et (Header yüklenene kadar)
 
     } catch (error) {
       console.error("Blogları alırken hata oluştu:", error);
@@ -79,11 +47,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
+  // Helper functions remain the same...
   function showSkeleton() {
     const postsContainer = document.getElementById("posts-container");
+    if (!postsContainer) return;
     postsContainer.innerHTML = "";
-
-    // 6 tane boş skeleton kart oluştur
     const skeletonHTML = `
       <div class="blog-card skeleton-card">
           <div class="skeleton skeleton-image"></div>
@@ -95,12 +63,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
       </div>
     `.repeat(6);
-
     postsContainer.innerHTML = skeletonHTML;
   }
 
   function renderPosts(postsToRender, _, categoryMap, enableFeatured) {
     const postsContainer = document.getElementById("posts-container");
+    if (!postsContainer) return;
     postsContainer.innerHTML = "";
 
     if (postsToRender.length === 0) {
@@ -109,7 +77,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     postsToRender.forEach((post, index) => {
-      console.log("Post Data:", post); // Debugging slug issue
       const imageUrl = post.image_url?.startsWith("http")
         ? post.image_url
         : `${API_BASE}${post.image_url || "/uploads/default.jpg"}`;
@@ -118,8 +85,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const postElement = document.createElement("div");
 
-      // Sadece ilk yüklemede ve anasayfada featured olsun, aramada olmasın
-      if (enableFeatured && index === 0) {
+      // Sadece anasayfada ilk post featured olsun
+      if (enableFeatured && index === 0 && !isBlogPage) {
         postElement.classList.add("featured-post");
       } else {
         postElement.classList.add("blog-card");
@@ -152,7 +119,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  fetchPosts();
+  // Sadece anasayfada main.js çalışsın (Blog sayfasında blog.js çalışıyor)
+  if (!isBlogPage) {
+    fetchPosts();
+  }
 });
 
 // ------------------------------------------
