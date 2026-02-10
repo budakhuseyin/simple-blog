@@ -40,6 +40,12 @@ async function loadMessages() {
             headers: { "Authorization": `Bearer ${token}` }
         });
 
+        if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem("adminToken");
+            window.location.href = "login.html";
+            return;
+        }
+
         if (!res.ok) throw new Error("Mesajlar alınamadı");
 
         const messages = await res.json();

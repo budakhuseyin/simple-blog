@@ -30,8 +30,7 @@ router.post('/', async (req, res) => {
                 secure: true, // SSL
                 logger: true,
                 debug: true,
-                family: 4, // IPv4 only
-                localAddress: '0.0.0.0', // Force IPv4 interface binding
+                family: 4, // IPv4 only (No localAddress)
                 auth: {
                     user: process.env.EMAIL_USER,
                     pass: process.env.EMAIL_PASS
@@ -39,7 +38,7 @@ router.post('/', async (req, res) => {
                 tls: {
                     rejectUnauthorized: false
                 },
-                connectionTimeout: 30000 // 30s timeout
+                connectionTimeout: 20000
             });
 
             const mailOptions = {
