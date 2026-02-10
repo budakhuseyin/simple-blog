@@ -20,33 +20,41 @@ router.post('/', async (req, res) => {
         );
 
         // 2️⃣ E-posta Gönder (Admin'e Bildirim)
-        // NOT: Gmail App Password kullanmanız gerekir.
+        console.log("E-posta gönderimi başlıyor...");
         if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+            console.log(`E-posta yapılandırması: User=${process.env.EMAIL_USER}, Pass=${process.env.EMAIL_PASS ? '********' : 'EKSİK'}`);
+
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
                 auth: {
                     user: process.env.EMAIL_USER,
                     pass: process.env.EMAIL_PASS
+                },
+                tls: {
+                    rejectUnauthorized: false // Render/Cloud ortamlarında SSL hatalarını önler
                 }
             });
 
             const mailOptions = {
-                from: process.env.EMAIL_USER,
-                to: 'huseyinbudak904@gmail.com', // Kullanıcının belirttiği mail adresi
-                subject: 'Yeni İletişim Formu Mesajı',
-                text: `Ad: ${name}\nE-posta: ${email}\nMesaj:\n${message}`
+                from: `"Blog İletişim" <${process.env.EMAIL_USER}>`,
+                to: 'huseyinbudak904@gmail.com',
+                replyTo: email, // Gönderen kişinin mailine yanıt verilebilsin
+                subject: `Yeni Mesaj: ${name}`,
+                text: `Gönderen: ${name} (${email})\n\nMesaj:\n${message}`
             };
 
+            // Send mail
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    console.error("E-posta gönderilemedi:", error);
-                    // Hata olsa bile kullanıcıya başarılı döndük, çünkü DB'ye kaydettik.
+                    console.error("❌ E-POSTA HATASI:", error);
                 } else {
-                    console.log('E-posta gönderildi: ' + info.response);
+                    console.log('✅ E-posta gönderildi:', info.messageId);
                 }
             });
         } else {
-            console.warn("E-posta ayarları eksik, mail gönderilmedi.");
+            console.warn("⚠️ E-posta ayarları (EMAIL_USER veya EMAIL_PASS) bulunamadı!");
         }
 
         res.status(201).json({ message: "Mesajınız başarıyla gönderildi." });
