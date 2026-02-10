@@ -655,3 +655,18 @@ h6 {
         font-size: 24px !important;
     }
 }
+
+/* Blog Content Images Fix */
+#blog-content img {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    /* Artık sabit bir sınır var (yaklaşık laptop ekranının yarısı) */
+    width: auto !important;
+    height: auto !important;
+    border-radius: 12px;
+    display: block;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    object-fit: contain;
+}

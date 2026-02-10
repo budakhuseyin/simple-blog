@@ -13,6 +13,104 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  // Quill Editor Kurulumu
+  // Quill Editor Kurulumu
+  var quill = new Quill('#editor-container', {
+    theme: 'snow',
+    modules: {
+      toolbar: {
+        container: [
+          [{ 'header': [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['blockquote', 'code-block'],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'color': [] }, { 'background': [] }],
+          ['link', 'image'],
+          ['clean']
+        ],
+        handlers: {
+          image: selectLocalImage
+        }
+      }
+    }
+  });
+
+  // 1. Toolbar butonuna tıklanınca çalışır
+  function selectLocalImage() {
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = () => {
+      const file = input.files[0];
+      if (/^image\//.test(file.type)) {
+        saveToServer(file);
+      } else {
+        console.warn('Sadece resim dosyası yükleyebilirsiniz.');
+      }
+    };
+  }
+
+  // 2. Sunucuya Yükleme Fonksiyonu
+  async function saveToServer(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await fetch(`${API_BASE}/posts/upload-image`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        insertToEditor(data.url);
+      } else {
+        alert('Resim yüklenemedi: ' + data.error);
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Resim yüklenirken hata oluştu.');
+    }
+  }
+
+  // 3. Editöre Ekleme Yardımcısı
+  function insertToEditor(url) {
+    const range = quill.getSelection();
+    quill.insertEmbed(range ? range.index : 0, 'image', url);
+  }
+
+  // 4. Sürükle-Bırak (Drag & Drop) Desteği
+  quill.root.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      const file = e.dataTransfer.files[0];
+      if (file.type.startsWith('image/')) {
+        saveToServer(file);
+      }
+    }
+  });
+
+  // 5. Yapıştırma (Paste) Desteği
+  quill.root.addEventListener('paste', (e) => {
+    if (e.clipboardData && e.clipboardData.items) {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          e.preventDefault(); // Base64 yapıştırmayı engelle
+          const file = items[i].getAsFile();
+          saveToServer(file);
+          return; // İlk resmi al ve çık
+        }
+      }
+    }
+  });
+
   // Kategorileri yükle
   async function loadCategories() {
     try {
@@ -38,7 +136,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const formData = new FormData();
     formData.append("title", document.getElementById("title").value);
-    formData.append("content", CKEDITOR.instances.content.getData());
+
+    // Quill içeriğini al
+    const content = quill.root.innerHTML;
+    formData.append("content", content);
+
     formData.append("category_id", categorySelect.value);
 
     const imageFile = document.getElementById("image").files[0];

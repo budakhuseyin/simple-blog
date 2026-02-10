@@ -549,5 +549,43 @@ tr:hover td {
     border-radius: 12px;
     color: var(--text-muted);
     font-size: 16px;
-    border: 2px dashed #e2e8f0;
+}
+
+/* ========================
+   QUILL EDITOR STYLES
+======================== */
+#editor-container {
+    height: 400px;
+    background: #fff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-size: 16px;
+    color: #334155;
+    font-family: 'Inter', sans-serif;
+}
+
+.ql-toolbar.ql-snow {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #f8fafc;
+    border-color: #cbd5e1 !important;
+}
+
+.ql-container.ql-snow {
+    border-color: #cbd5e1 !important;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Dark Mode Support (if added later) */
+@media (prefers-color-scheme: dark) {
+    /* If you ever add dark mode to admin, here is where you'd override */
+}
+
+/* Fix for large images in Quill editor */
+.ql-editor img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
 }
