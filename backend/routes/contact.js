@@ -27,10 +27,11 @@ router.post('/', async (req, res) => {
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
                 port: 587,
-                secure: false, // upgrade later with STARTTLS
+                secure: false,
                 requireTLS: true,
-                logger: true, // Log to console
-                debug: true,  // Include SMTP traffic in logs
+                logger: true,
+                debug: true,
+                family: 4, // ⚠️ Force IPv4 (Fixes ENETUNREACH on IPv6)
                 auth: {
                     user: process.env.EMAIL_USER,
                     pass: process.env.EMAIL_PASS
