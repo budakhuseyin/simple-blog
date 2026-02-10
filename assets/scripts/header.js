@@ -62,6 +62,18 @@ function setupMenu() {
         navLinks.classList.remove("active");
       }
     });
+
+    // Mobil Dropdown Toggle Logic
+    const dropdowns = document.querySelectorAll(".dropdown > a");
+    dropdowns.forEach(dropdownToggle => {
+      dropdownToggle.addEventListener("click", (e) => {
+        if (window.innerWidth <= 768) { // Only on mobile
+          e.preventDefault(); // Prevent navigation
+          const parent = dropdownToggle.parentElement;
+          parent.classList.toggle("active"); // Toggle visibility via CSS
+        }
+      });
+    });
   }
 
   fetchCategoriesForDropdown();

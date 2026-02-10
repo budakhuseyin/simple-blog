@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="/styles/header.css">
     <script src="../assets/scripts/header.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
 
 <body>
     <!-- components/header.html -->
     <header class="header">
-        <a href="/user/index.html" class="logo">KİŞİSEL BLOG</a>
+        <a href="/user/index.html" class="logo">
+            <img src="/assets/images/logo.png" alt="Logo" class="logo-img">
+            <span>KİŞİSEL BLOG</span>
+        </a>
         <nav>
             <div class="menu-toggle">&#9776;</div> <!-- Mobil Menü Butonu -->
             <!-- Menü toggle'ın yanına -->
@@ -25,10 +28,11 @@
                 <li><a href="/user/about.html">Hakkımızda</a></li>
 
                 <!-- Blog menüsü -->
+                <!-- Blog menüsü -->
                 <li class="dropdown">
-                    <a class="dropbtn">Yazılar ▼</a>
+                    <a href="#" class="dropbtn">Yazılar</a>
                     <ul class="dropdown-content" id="blogCategories">
-                        <!-- Buraya JS ile kategoriler eklenecek -->
+                        <!-- JS ile doldurulacak -->
                     </ul>
                 </li>
 
