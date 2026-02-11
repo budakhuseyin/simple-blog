@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Sayfa Bulunamadı (404) | Hüseyin Budak Blog</title>
+    <meta name="title" content="Sayfa Bulunamadı - 404">
+    <meta name="description" content="Aradığınız sayfa bulunamadı. Ana sayfaya dönün veya blog yazılarına göz atın.">
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/style.css">
+
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .error-title {
+            font-size: 32px;
+            margin: 20px 0;
+            color: #1f2937;
+        }
+
+        .error-description {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .error-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .error-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .error-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .error-btn.secondary {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .error-btn.secondary:hover {
+            background: #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 80px;
+            }
+
+            .error-title {
+                font-size: 24px;
+            }
+
+            .error-description {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <div class="error-container">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Sayfa Bulunamadı</h2>
+            <p class="error-description">
+                Üzgünüz, aradığınız sayfa mevcut değil veya taşınmış olabilir.
+                Ana sayfaya dönebilir veya blog yazılarımıza göz atabilirsiniz.
+            </p>
+            <div class="error-links">
+                <a href="/user/index.html" class="error-btn">Ana Sayfa</a>
+                <a href="/user/blog.html" class="error-btn secondary">Blog Yazıları</a>
+                <a href="/user/contact.html" class="error-btn secondary">İletişim</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Header ve Footer Dinamik Yükleme -->
+    <script>
+        fetch("/components/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+            });
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer-placeholder").innerHTML = data;
+            });
+    </script>
+
+    <script src="/assets/scripts/header.js"></script>
+    <script src="/assets/scripts/analytics.js"></script>
+</body>
+
+</html>

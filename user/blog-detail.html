@@ -4,8 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Detay</title>
+
+    <!-- Primary Meta Tags - Will be updated dynamically -->
+    <title>Blog Detay | Hüseyin Budak Blog</title>
+    <meta name="title" content="Blog Detay - Hüseyin Budak">
+    <meta name="description" content="Blog yazısını okuyun.">
+    <meta name="keywords" content="blog, yazılım, teknoloji">
+    <meta name="author" content="Hüseyin Budak">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL - Will be updated dynamically -->
+    <link rel="canonical" href="https://blog1-f397.onrender.com/user/blog-detail.html">
+
+    <!-- Open Graph / Facebook - Will be updated dynamically -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog1-f397.onrender.com/user/blog-detail.html">
+    <meta property="og:title" content="Blog Detay">
+    <meta property="og:description" content="Blog yazısını okuyun.">
+    <meta property="og:image" content="https://blog1-f397.onrender.com/assets/images/logo.png">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="Hüseyin Budak Blog">
+    <meta property="article:author" content="Hüseyin Budak">
+
+    <!-- Twitter Card - Will be updated dynamically -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://blog1-f397.onrender.com/user/blog-detail.html">
+    <meta name="twitter:title" content="Blog Detay">
+    <meta name="twitter:description" content="Blog yazısını okuyun.">
+    <meta name="twitter:image" content="https://blog1-f397.onrender.com/assets/images/logo.png">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/images/logo.png">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://res.cloudinary.com">
+
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/footer.css">
     <link rel="stylesheet" href="/styles/style.css">
@@ -20,18 +53,18 @@
     <div id="header-placeholder"></div>
 
     <main>
-        <div id="blog-detail-container">
+        <article id="blog-detail-container">
             <h1 id="blog-title"></h1>
             <small id="blog-meta" style="display: block; margin-bottom: 15px; color: #666;"></small>
 
-            <img id="blog-image" src="" alt="Blog Resmi">
+            <img id="blog-image" src="" alt="Blog Resmi" loading="lazy">
             <div id="blog-content"></div>
 
             <!-- Social Share Buttons -->
             <div id="share-buttons" class="share-buttons">
                 <!-- Buttons will be injected by JS -->
             </div>
-        </div>
+        </article>
 
         <section id="comments-section">
             <h2>Yorumlar</h2>
@@ -65,9 +98,11 @@
     </script>
 
     <!-- JS Dosyaları -->
+    <script src="/assets/scripts/seo-helper.js"></script>
     <script src="/assets/scripts/blog-detail.js"></script>
     <script src="/assets/scripts/header.js"></script>
     <script src="/assets/scripts/comments.js"></script>
+    <script src="/assets/scripts/analytics.js"></script>
 </body>
 
 </html>

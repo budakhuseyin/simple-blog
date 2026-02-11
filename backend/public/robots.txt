@@ -1,0 +1,13 @@
+# Robots.txt for Blog
+# This file tells search engines which pages to crawl
+
+User-agent: *
+Allow: /
+
+# Disallow admin and backend paths
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://blog1-f397.onrender.com/sitemap.xml

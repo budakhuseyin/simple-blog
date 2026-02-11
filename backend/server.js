@@ -29,6 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 // Cloudinary’e geçtik ama eski resimler için gerekebilir
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Public folder for static files (robots.txt, etc.)
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Diğer frontend klasörleri
 app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/user', express.static(path.resolve(__dirname, '../user')));
@@ -42,6 +45,10 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/comments', commentsRoutes);
 app.use('/api/contact', require('./routes/contact'));
+
+// ✅ SEO Routes
+const sitemapRoutes = require('./routes/sitemap');
+app.use('/', sitemapRoutes); // Serves /sitemap.xml
 
 // Hata yönetimi
 app.use((err, req, res, next) => {
@@ -62,6 +69,11 @@ app.get('/test-db', async (req, res) => {
     console.error('Veritabanı bağlantı hatası:', error.message);
     res.status(500).json({ status: 'error', message: error.message });
   }
+});
+
+// 404 Handler - Must be last route
+app.use((req, res) => {
+  res.status(404).sendFile(path.resolve(__dirname, '../user/404.html'));
 });
 
 // Server başlat
