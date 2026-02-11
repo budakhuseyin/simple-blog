@@ -4,7 +4,7 @@
  */
 
 // Google Analytics Configuration
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // TODO: Replace with your GA4 Measurement ID
+const GA_MEASUREMENT_ID = 'G-ERXXHC7WY8'; // Google Analytics 4 Measurement ID
 
 /**
  * Initialize Google Analytics
