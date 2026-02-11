@@ -46,6 +46,11 @@ app.use('/api/categories', categoriesRoutes);
 app.use('/api/comments', commentsRoutes);
 app.use('/api/contact', require('./routes/contact'));
 
+// ✅ Root Redirect - Ana domain'e girildiğinde index.html'e yönlendir
+app.get('/', (req, res) => {
+  res.redirect('/user/index.html');
+});
+
 // ✅ SEO Routes
 const sitemapRoutes = require('./routes/sitemap');
 app.use('/', sitemapRoutes); // Serves /sitemap.xml
